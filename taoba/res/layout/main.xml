@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+
+    <ViewFlipper
+        android:id="@+id/container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0"
+        android:background="#ffffffff" >
+        
+    </ViewFlipper>
+    
+
+    <RadioGroup
+        android:id="@+id/main_radion"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/taba_bottom"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <RadioButton android:id="@+id/btn_tab_today_tuan"
+            android:background="@drawable/tab_today_tuan"
+            android:layout_marginTop="2dip"
+			android:layout_width="fill_parent"
+			android:layout_weight="1.0"
+			android:gravity="center"
+            android:button="@null"
+            android:checked="true"
+            android:text="正在团购"/>
+        <RadioButton android:id="@+id/btn_tab_near_tuan"
+            android:background="@drawable/tab_today_tuan"
+            android:layout_marginTop="2dip"
+			android:layout_width="fill_parent"
+			android:layout_weight="1.0"
+			android:gravity="center"
+            android:button="@null"
+            android:text="定位团购"/>
+        <RadioButton android:id="@+id/btn_tab_my_center"
+            android:background="@drawable/tab_today_tuan"
+            android:layout_marginTop="2dip"
+			android:layout_width="fill_parent"
+			android:layout_weight="1.0"
+			android:gravity="center"
+            android:button="@null"
+            android:text="个人中心"/>
+        <RadioButton android:id="@+id/btn_tab_more_info"
+            android:background="@drawable/tab_today_tuan"
+            android:layout_marginTop="2dip"
+			android:layout_width="fill_parent"
+			android:layout_weight="1.0"
+			android:gravity="center"
+            android:button="@null"
+            android:text="更多"/>
+    </RadioGroup>
+
+</LinearLayout>

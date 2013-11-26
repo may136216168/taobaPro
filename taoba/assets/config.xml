@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config client-tag="android_1" client-version="1.0" page-source="local"
+        debug="false">
+    <remote-prefix>http://www.tuan800.com/dl/mobile/</remote-prefix>
+    <remote-update-path>http://www.tuan800.com/dl/mobile/update/</remote-update-path>
+    <remote-version-url>http://www.tuan800.com/dl/mobile/update/android_version.xml</remote-version-url>
+    
+    <javascript-bridges>
+        <javascript-bridge name="daquan_js" class="love.android.taoba.javascript.Bridge"/>
+    </javascript-bridges>
+    
+    <database name="love_android_taoba.db"/>
+    <assets>
+        <asset path="web" type="folder" copy="true" config="WEB_FILE_FOLDER"/>
+        <asset path="update" type="folder" copy="true" config="UPDATE_FILE_FOLDER"/>
+    </assets>
+</config>
