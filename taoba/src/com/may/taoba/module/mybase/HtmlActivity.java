@@ -16,7 +16,7 @@ import android.webkit.WebViewClient;
 import com.may.taoba.module.Config;
 import com.may.taoba.tools.StringTool;
 
-public class HtmlActivity extends MyActivity {
+public abstract class HtmlActivity extends MyActivity {
 	protected WebView webView;
 	//表示当前HtmlActivity打开的链接
 	private String currentUrlStr;
@@ -31,6 +31,8 @@ public class HtmlActivity extends MyActivity {
 	public WebView getWebView() {
 		return webView;
 	}
+	
+	protected abstract void initLayout();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class HtmlActivity extends MyActivity {
 		}
 		//2 WebView控件，这个控件用来加载网页和调用js
 		webView = new WebView(this);
+		initLayout();
 		webView.setWebViewClient(new MyWebViewClient());
 		//3 注册一些js
 		

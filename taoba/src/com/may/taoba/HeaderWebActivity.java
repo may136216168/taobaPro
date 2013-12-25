@@ -1,5 +1,6 @@
 package com.may.taoba;
 
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -9,6 +10,11 @@ import android.widget.TextView;
 
 import com.may.taoba.module.mybase.HtmlActivity;
 
+/**
+ * 这个类主要是在HtmlActivity的基础上加上一个返回按钮和一个标题
+ * @author ZhangJian
+ *
+ */
 public class HeaderWebActivity extends HtmlActivity {
 	//第一个成员button,用来返回
 	Button backButton;
@@ -21,7 +27,7 @@ public class HeaderWebActivity extends HtmlActivity {
 	
 	
 	//布局初始化函数，让布局更好看
-	private void initLayout(){
+	protected void initLayout(){
 		//首先通过xml来设置布局
 		this.setContentView(R.layout.header_web);
 		//找到线性布局和按钮
@@ -39,11 +45,33 @@ public class HeaderWebActivity extends HtmlActivity {
 		
 		//刚好能够显示在整个屏幕中
 		webView.setInitialScale(100);
+		webView.setVerticalScrollBarEnabled(false);//这个表示不显示滚动条
 		webView.setOnLongClickListener(new OnLongClick2());
 		
 		WebSettings webSesstings = webView.getSettings();
 		webSesstings.setJavaScriptEnabled(true);
 		webSesstings.setJavaScriptCanOpenWindowsAutomatically(true);
+		
+		linearLayout.addView(webView);
+	}
+	
+	/**
+	 * 得到它的顶层窗口
+	 * @return
+	 */
+	public ActivityContainer getStack(){
+		return (ActivityContainer)this.getParent();
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		
+		
+		return super.onKeyDown(keyCode, event);
+	}
+	
+	public void setWebTitle(String title){
+		this.titleTextView.setText(title);
 	}
 	
 	private class OnButtonClick implements View.OnClickListener{
