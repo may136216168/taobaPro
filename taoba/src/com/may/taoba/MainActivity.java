@@ -5,7 +5,10 @@ import java.util.Map;
 
 import android.app.ActivityGroup;
 import android.app.LocalActivityManager;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ import android.widget.ViewFlipper;
 public class MainActivity extends ActivityGroup {
 
 	private ViewFlipper container;
+	private ActivityContainer innerContainer;
 	private LocalActivityManager localActivityManager;
 	private Map map;
 	
@@ -27,29 +31,21 @@ public class MainActivity extends ActivityGroup {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		ininMap();
 		container = (ViewFlipper)findViewById(R.id.container);
 		//得到管理窗口的LocalActivityManager
 		localActivityManager = this.getLocalActivityManager();
 		//第一次需要打开的页面
+		Intent intent = new Intent (this,ActivityContainer.class);
 		
+		Window window = localActivityManager.startActivity("main_container", intent);
+		innerContainer = (ActivityContainer)window.getContext();
 		
-		TextView textView1 = new TextView(this);
-		textView1.setText("这里是第一个视图1");
+		View view = window.getDecorView();
+		container.addView(view);
+		container.showNext();
 		
-		TextView textView2 = new TextView(this);
-		textView2.setText("这里是第一个视图2");
-		
-		TextView textView3 = new TextView(this);
-		textView3.setText("这里是第一个视图3");
-		
-		TextView textView4 = new TextView(this);
-		textView4.setText("这里是第一个视图4");
-		container.addView(textView1);
-		container.addView(textView2);
-		container.addView(textView3);
-		container.addView(textView4);
 		initCheckClick();
-		ininMap();
 	}
 	
 	private void ininMap(){

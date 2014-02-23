@@ -73,4 +73,24 @@ public class ActivityContainer extends ActivityGroup {
 		//这里需要调用一个html的js函数
 //		ha.triggerSearch(query, appSearchData)
 	}
+	
+	/**
+	 * 返回到最底面的窗口，如果是最底面的窗口，那么返回false.
+	 * @return
+	 */
+	public boolean backToStackBottom(){
+		boolean flag;
+		if(stack.size() <= 1){
+			flag = false;
+		}else{
+			//到最底面的一个窗口
+			container.removeAllViews();
+			
+			HeaderWebActivity hwa = stack.pop();
+			View view = stack.pop2Bottom().getWindow().getDecorView();
+			showView(view, 1, null);
+			flag = true;
+		}
+		return flag;
+	}
 }

@@ -29,20 +29,20 @@ public class ActivityStack {
 	}
 	
 	//出栈
-	public HtmlActivity pop(){
+	public HeaderWebActivity pop(){
 		if(stackList == null && stackList.size() == 0){
 			return null;
 		}else{
-			HtmlActivity htmlActivity = getTop();
+			HeaderWebActivity htmlActivity = getTop();
 			int i = stackList.size() - 1;
 			Object obj = stackList.remove(i);
 			return htmlActivity;
 		}
 	}
 	//得到第一个元素
-	public HtmlActivity getTop(){
+	public HeaderWebActivity getTop(){
 		int i = stackList.size() - 1;
-		return (HtmlActivity)stackList.get(i);
+		return (HeaderWebActivity)stackList.get(i);
 	}
 	
 	//弹出函数，就是只剩下堆栈底部的元素
