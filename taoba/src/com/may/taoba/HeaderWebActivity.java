@@ -26,10 +26,15 @@ public class HeaderWebActivity extends HtmlActivity {
 	//有一个文本，表示View的标题
 	TextView titleTextView;
 	
+	private String id;
+	
 	public HeaderWebActivity() {
 	}
 	
-	
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	//布局初始化函数，让布局更好看
 	protected void initLayout(){
 		//首先通过xml来设置布局

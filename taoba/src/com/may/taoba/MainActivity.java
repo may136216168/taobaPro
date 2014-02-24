@@ -9,8 +9,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -45,7 +47,15 @@ public class MainActivity extends ActivityGroup {
 		container.addView(view);
 		container.showNext();
 		
+		//将网嶥给显示出来
+		openStackView("today_tuan","category.html","正在团购");
+		
 		initCheckClick();
+	}
+	
+	private void openStackView(String name,String fileName,String title){
+		ActivityStack activityStack = (ActivityStack)map.get(name);
+		innerContainer.openStackAndInit(activityStack, fileName, title);
 	}
 	
 	private void ininMap(){
@@ -67,8 +77,10 @@ public class MainActivity extends ActivityGroup {
 	 */
 	private void initCheckClick(){
 		MyCheckChangeListener myCheckChangeListener = new MyCheckChangeListener();
-		RadioGroup radioGroup = (RadioGroup)findViewById(R.id.main_radion);
-		radioGroup.setOnCheckedChangeListener(myCheckChangeListener);
+		((RadioButton)findViewById(R.id.btn_tab_today_tuan)).setOnCheckedChangeListener(myCheckChangeListener);
+		((RadioButton)findViewById(R.id.btn_tab_near_tuan)).setOnCheckedChangeListener(myCheckChangeListener);
+		((RadioButton)findViewById(R.id.btn_tab_my_center)).setOnCheckedChangeListener(myCheckChangeListener);
+		((RadioButton)findViewById(R.id.btn_tab_more_info)).setOnCheckedChangeListener(myCheckChangeListener);
 	}
 	
 	private class MyCheckChangeListener implements OnCheckedChangeListener{
@@ -79,8 +91,9 @@ public class MainActivity extends ActivityGroup {
 			this$0 = MainActivity.this;
 		}
 		@Override
-		public void onCheckedChanged(RadioGroup group, int checkedId) {
-			switch (checkedId) {
+		public void onCheckedChanged(CompoundButton buttonView,
+				boolean isChecked) {
+			switch (buttonView.getId()) {
 			case R.id.btn_tab_today_tuan:
 				container.showNext();
 				break;

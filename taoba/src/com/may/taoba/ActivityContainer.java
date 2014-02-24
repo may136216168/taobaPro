@@ -1,14 +1,19 @@
 package com.may.taoba;
 
-import com.may.taoba.module.mybase.HtmlActivity;
+import java.util.UUID;
 
 import android.app.ActivityGroup;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ViewFlipper;
+
+import com.may.taoba.module.mybase.HtmlActivity;
+import com.may.taoba.tools.StringTool;
 
 /**
  * 管理很多Activity的容器.
@@ -37,6 +42,80 @@ public class ActivityContainer extends ActivityGroup {
 	public ActivityContainer() {
 	}
 	
+	public void openStackAndInit(ActivityStack activityStack,String s1,String s2){
+		setStack(activityStack);
+		
+		this.getLocalActivityManager().removeAllActivities();
+		
+		if(activityStack.size() == 0 && StringTool.isEmpty(s1) ==false){
+			//通过url打开一个窗口
+			openUrl(s1,s2,true);
+		}else{
+			openStack(activityStack);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param s
+	 * @param s2
+	 * @param flag 表示是否第一次加载url
+	 */
+	private void openUrl(String s,String s2,boolean flag) {
+		//打开一个web窗口
+		Bundle bundle = new Bundle();
+		bundle.putString("url", s);
+		bundle.putString("ui_title", s2);
+		openWebActivity(bundle,flag);
+	}
+
+	private void openWebActivity(Bundle bundle,boolean flags) {
+		//新打开一个可以显示web页面activity,然后showView
+		container.setInAnimation(leftIn);
+		container.setOutAnimation(leftOut);
+		
+		bundle.putBoolean("isFirst", flags);
+		Intent intent = new Intent(this,HeaderWebActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+		intent.putExtras(bundle);
+		
+		String id = UUID.randomUUID().toString();
+		Window window = this.getLocalActivityManager().startActivity(id, intent);
+		
+		View view = window.getDecorView();
+		
+		if(bundle != null){
+			String s1 = bundle.getString("not_in_stack");
+			if("true".equalsIgnoreCase(s1)==false){
+				HeaderWebActivity headerWebActivity = (HeaderWebActivity)window.getContext();
+				headerWebActivity.setId(id);
+				stack.push(headerWebActivity);
+			}
+		}
+		showView(view, 0, null);
+	}
+
+	/**
+	 * 打开一个已经有的堆栈里面的view.
+	 * @param activityStack
+	 */
+	private void openStack(ActivityStack activityStack) {
+		setStack(activityStack);
+		HeaderWebActivity header = activityStack.getTop();
+		if(header != null){
+			container.setInAnimation(null);
+			container.setOutAnimation(null);
+			container.removeAllViews();
+			//显示我们的窗体
+			View view = header.getWindow().getDecorView();
+			showView(view, 2, "");
+		}
+	}
+
+	private void setStack(ActivityStack activityStack) {
+		stack = activityStack;
+	}
+
 	/**
 	 * 在这里去做一些初始化的工作.
 	 */

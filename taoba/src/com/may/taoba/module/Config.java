@@ -126,7 +126,7 @@ public class Config {
 	public static String REMOTE_UPDATE_PATH;
 	public static String REMOTE_VERSION_PATH;
 	
-	public static String WEB_FILE_PREFIX;
+	public static String WEB_FILE_PREFIX="file:///data/data/com.may.taoba/files/web/";
 	
 	//file://
 	

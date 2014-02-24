@@ -7,7 +7,7 @@
         android:layout_height="45.0dip">
         
         <Button android:id="@+id/btn_main_title_back" android:background="@drawable/main_title_back" 
-            android:layout_width="45.0dip" android:layout_height="wrap_content" 
+            android:layout_width="36.0dip" android:layout_height="wrap_content" 
             android:layout_marginLeft="7.0dip" android:layout_alignParentLeft="true" 
             android:layout_centerVertical="true" />
         
