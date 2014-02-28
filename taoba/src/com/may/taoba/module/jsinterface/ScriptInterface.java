@@ -7,14 +7,14 @@ import com.may.taoba.module.mybase.HtmlActivity;
  * @author ZhangJian
  *
  */
-public class ScirptInterface {
+public class ScriptInterface {
 
 	private HtmlActivity context;
 	
-	public ScirptInterface(){
+	public ScriptInterface(){
 	}
 
-	public ScirptInterface(HtmlActivity webActivity){
+	public ScriptInterface(HtmlActivity webActivity){
 		this.context = webActivity;
 	}
 

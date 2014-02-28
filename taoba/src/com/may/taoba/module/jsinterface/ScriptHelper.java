@@ -6,6 +6,7 @@ import java.util.Map;
 
 import android.webkit.WebView;
 
+import com.may.taoba.module.Config;
 import com.may.taoba.module.mybase.HtmlActivity;
 
 /**
@@ -30,6 +31,26 @@ public class ScriptHelper {
 		
 		NetWorkInterface netWorkInterface = new NetWorkInterface();
 		interfaceMap.put("android_net", netWorkInterface);
+		
+		//调试Log
+		LogInterface logInterface = new LogInterface();
+		interfaceMap.put("android_log", logInterface);
+		try{
+		//这里将Bridge注册，已经config.xml已经被Config.java这个类给解析
+		Iterator iterator = Config.JAVASCRIPT_BRIDGES.entrySet().iterator();
+		while (iterator.hasNext()) {
+			java.util.Map.Entry entry = (java.util.Map.Entry)iterator.next();
+			String s1 = (String)entry.getKey();
+			String s2 = (String)entry.getValue();
+			Class class1 = Class.forName("com.may.taoba.javascript.Bridge");
+			Object obj1 = class1.newInstance();
+			interfaceMap.put(s1, obj1);
+			
+			System.out.println("s="+s1+" obj1"+obj1);
+		}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void bindJavascriptInterface(HtmlActivity htmlActivity){
@@ -44,8 +65,8 @@ public class ScriptHelper {
 				Map.Entry entry = (Map.Entry)iterator.next();
 				keyString = (String)entry.getKey();
 				object = entry.getValue();
-				if(object instanceof ScirptInterface){
-					((ScirptInterface)object).setContext(htmlActivity);
+				if(object instanceof ScriptInterface){
+					((ScriptInterface)object).setContext(htmlActivity);
 				}
 				
 				webView.addJavascriptInterface(object, "keyString");

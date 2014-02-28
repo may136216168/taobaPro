@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.may.taoba.module.store.Bean;
 import com.may.taoba.module.store.Database;
+import com.may.taoba.tools.StringTool;
 
 /**
  * 属性：
@@ -31,7 +32,31 @@ public class CitiesList extends Bean {
 
 	private SQLiteDatabase sqliteDb;
 	private final static String webStrUrl = "http://192.168.1.1";
+	private static CitiesList instance;
+	
 	public CitiesList() {
+	}
+	
+	public static CitiesList getInstance()
+	{
+		if (instance == null)
+			instance = new CitiesList();
+		return instance;
+	}
+	
+	//获取所有的Json数据
+	public String getAllJson(){
+		Object aobj[] = new Object[1];
+		aobj[0] = "citylist";
+		String s = StringTool.simpleFormat("select json from %s where json <> '';", aobj);
+		//String s = "select ";
+		Object aobj1[][] = db.query(s);
+		String s1;
+		if (aobj1.length > 0 && aobj1[0].length > 0)
+			s1 = aobj1[0][0].toString();
+		else
+			s1 = "";
+		return s1;
 	}
 	
 	public void initCities(){

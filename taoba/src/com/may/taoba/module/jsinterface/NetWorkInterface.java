@@ -19,7 +19,7 @@ import com.may.taoba.tools.StringTool;
  * @author ZhangJian
  *
  */
-public class NetWorkInterface extends ScirptInterface{
+public class NetWorkInterface extends ScriptInterface{
 
 	private NetworkService networkService;
 	private String error400;

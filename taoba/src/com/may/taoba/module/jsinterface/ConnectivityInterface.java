@@ -2,7 +2,7 @@ package com.may.taoba.module.jsinterface;
 
 import com.may.taoba.module.ServicesManager;
 
-public class ConnectivityInterface extends ScirptInterface{
+public class ConnectivityInterface extends ScriptInterface{
 
 	public ConnectivityInterface(){
 	}

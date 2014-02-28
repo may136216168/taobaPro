@@ -8,7 +8,7 @@ import com.may.taoba.module.ServicesManager;
 import com.may.taoba.module.store.Database;
 import com.may.taoba.module.store.DatabaseManager;
 
-public class StoreInterface extends ScirptInterface{
+public class StoreInterface extends ScriptInterface{
 
 	DatabaseManager dbManager;
 	KeyValue keyValue;

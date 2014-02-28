@@ -6,7 +6,7 @@
     <remote-version-url>http://www.tuan800.com/dl/mobile/update/android_version.xml</remote-version-url>
     
     <javascript-bridges>
-        <javascript-bridge name="daquan_js" class="love.android.taoba.javascript.Bridge"/>
+        <javascript-bridge name="daquan_js" class="com.may.taoba.javascript.Bridge"/>
     </javascript-bridges>
     
     <database name="love_android_taoba.db"/>
