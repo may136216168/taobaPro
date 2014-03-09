@@ -3,6 +3,7 @@ package com.may.taoba;
 import java.util.UUID;
 
 import android.app.ActivityGroup;
+import android.app.LocalActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -67,6 +68,11 @@ public class ActivityContainer extends ActivityGroup {
 		bundle.putString("url", s);
 		bundle.putString("ui_title", s2);
 		openWebActivity(bundle,flag);
+	}
+	
+	public void openWebActivity(Bundle bundle){
+		//调用具体打开webActivity的方法
+		openWebActivity(bundle, false);
 	}
 
 	private void openWebActivity(Bundle bundle,boolean flags) {
@@ -171,5 +177,23 @@ public class ActivityContainer extends ActivityGroup {
 			flag = true;
 		}
 		return flag;
+	}
+	
+	public void back(String s){
+		if (stack.size() != 1){
+			ViewFlipper viewflipper = container;
+			Animation animation = rightIn;
+			viewflipper.setInAnimation(animation);
+			ViewFlipper viewflipper1 = container;
+			Animation animation1 = rightOut;
+			viewflipper1.setOutAnimation(animation1);
+			container.removeAllViews();
+			HeaderWebActivity headerwebactivity = stack.pop();
+			View view = stack.getTop().getWindow().getDecorView();
+			showView(view, 1, s);
+			LocalActivityManager localactivitymanager = getLocalActivityManager();
+			String s1 = headerwebactivity.getId();
+			Window window = localactivitymanager.destroyActivity(s1, true);
+		}
 	}
 }

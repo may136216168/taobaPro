@@ -9,7 +9,7 @@ import com.may.taoba.module.mybase.HtmlActivity;
  */
 public class ScriptInterface {
 
-	private HtmlActivity context;
+	protected HtmlActivity context;
 	
 	public ScriptInterface(){
 	}
@@ -26,5 +26,8 @@ public class ScriptInterface {
 		this.context = context;
 	}
 	
+	public void runInHandlerThread(Runnable runnable){
+		boolean flag = getContext().getHandler().post(runnable);
+	}
 	
 }

@@ -34,6 +34,11 @@ public class HeaderWebActivity extends HtmlActivity {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public String getId()
+	{
+		return id;
+	}
 
 	//布局初始化函数，让布局更好看
 	protected void initLayout(){

@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -20,6 +21,8 @@ public abstract class HtmlActivity extends MyActivity {
 	protected WebView webView;
 	//表示当前HtmlActivity打开的链接
 	private String currentUrlStr;
+	
+	protected Handler mHandler;
 	
 	//标题
 	private String title;
@@ -32,8 +35,36 @@ public abstract class HtmlActivity extends MyActivity {
 		return webView;
 	}
 	
+	public Handler getHandler()
+	{
+		return mHandler;
+	}
+	
 	protected abstract void initLayout();
 
+	/*
+	 * 这里是调用js的函数
+	 */
+	public void CallJSFunction(String s,String as[])
+	{
+		// 先构造一个js的字符串
+		String s1 = "if(typeof " + s +"=='function') " + s +"("+ StringTool.join(Arrays.asList(as), ",") +")";
+		CallJavascript(s1);
+	}
+	
+	/*
+	 * 调用javascript
+	 * s 参数是javascript的代码
+	 */
+	public void CallJavascript(String s)
+	{
+		// 先构造一个js代码 alert('你好，android')
+		// s1 = javascript:alert('你好，android')
+		String s1 = "javascript:" +s;
+		webView.loadUrl(s1);	// 就是执行javascript
+		
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
